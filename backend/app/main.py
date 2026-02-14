@@ -21,5 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Health check endpoints
+@app.get("/")
+async def root():
+    return {"message": "Task Board API is running"}
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 app.include_router(tasks.router)
 app.include_router(webhooks.router)
